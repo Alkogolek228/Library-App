@@ -8,8 +8,8 @@ const UserBooks = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const userId = localStorage.getItem('userId'); // Получение userId из localStorage
-        const token = localStorage.getItem('token'); // Получение токена из localStorage
+        const userId = localStorage.getItem('userId'); 
+        const token = localStorage.getItem('token'); 
         if (!userId) {
           throw new Error('User ID not found');
         }
@@ -29,11 +29,10 @@ const UserBooks = () => {
           });
           return { ...book, author: authorResponse.data };
         }));
-        console.log('Fetched user books:', booksWithAuthors); // Вывод результатов в консоль
         setBooks(booksWithAuthors);
       } catch (error) {
         console.error('Failed to fetch user books', error);
-        setBooks([]); // Ensure books is always an array
+        setBooks([]); 
       }
     };
     fetchBooks();

@@ -28,7 +28,7 @@ const BookList = () => {
     try {
       const data = await getAllBooks(page, pageSize, search, author, genre);
       if (data && data.items) {
-        console.log('Fetched books:', data.items); // Вывод результатов в консоль
+        console.log('Fetched books:', data.items); 
         const booksWithAuthors = await Promise.all(data.items.map(async (book) => {
           try {
             const authorResponse = await axios.get(`http://localhost:5242/api/authors/${book.authorId}`, getAuthHeaders());
@@ -38,8 +38,8 @@ const BookList = () => {
             return book;
           }
         }));
-        setBooks(booksWithAuthors); // Отображение всех книг, включая взятые
-        setFilteredBooks(booksWithAuthors); // Инициализация отфильтрованных книг
+        setBooks(booksWithAuthors); 
+        setFilteredBooks(booksWithAuthors); 
       } else {
         console.error('Unexpected response:', data);
         setBooks([]);
@@ -47,8 +47,8 @@ const BookList = () => {
       }
     } catch (error) {
       console.error('Failed to fetch books', error);
-      setBooks([]); // Ensure books is always an array
-      setFilteredBooks([]); // Ensure filteredBooks is always an array
+      setBooks([]); 
+      setFilteredBooks([]);
     }
   };
 

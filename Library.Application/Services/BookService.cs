@@ -112,7 +112,6 @@ namespace Library.Application.Services
                     await _notificationService.SendNotificationAsync(user.Id.ToString(), message);
                 }
 
-                // Обновление статуса книги, чтобы она снова была доступна для взятия
                 book.BorrowedOn = null;
                 book.ReturnBy = null;
                 _unitOfWork.Books.Update(book);

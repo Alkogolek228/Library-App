@@ -6,23 +6,22 @@ import axios from 'axios';
 const BookDetail = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
-  const [userRole, setUserRole] = useState(null); // Добавьте состояние для роли пользователя
-  const [showModal, setShowModal] = useState(false); // Состояние для отображения модального окна
-  const [returnBy, setReturnBy] = useState(''); // Состояние для даты возврата
+  const [userRole, setUserRole] = useState(null); 
+  const [showModal, setShowModal] = useState(false);
+  const [returnBy, setReturnBy] = useState(''); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBook = async () => {
       try {
         const data = await getBookById(id);
-        const token = localStorage.getItem('token'); // Получение токена из localStorage
+        const token = localStorage.getItem('token'); 
         const authorResponse = await axios.get(`http://localhost:5242/api/authors/${data.authorId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
         setBook({ ...data, author: authorResponse.data });
-        console.log('Fetched book:', data); // Вывод результатов в консоль
       } catch (error) {
         console.error('Failed to fetch book', error);
       }
@@ -44,7 +43,6 @@ const BookDetail = () => {
     }
     try {
       const data = await borrowBook(id, returnBy);
-      console.log('Borrowed book:', data); // Вывод результатов в консоль
       navigate('/user/books');
     } catch (error) {
       console.error('Borrow failed', error);
@@ -80,13 +78,13 @@ const BookDetail = () => {
             type="date"
             value={returnBy}
             onChange={(e) => setReturnBy(e.target.value)}
-            min={new Date().toISOString().split('T')[0]} // Установка минимальной даты на сегодня
+            min={new Date().toISOString().split('T')[0]} 
             required
           />
           <button onClick={handleBorrow}>Borrow</button>
         </>
       )}
-      {userRole === '0' && ( // Проверка числового значения роли
+      {userRole === '0' && (
         <>
           <button onClick={() => navigate(`/admin/books/${id}/edit`)}>Edit</button>
           <button onClick={() => setShowModal(true)}>Delete</button>

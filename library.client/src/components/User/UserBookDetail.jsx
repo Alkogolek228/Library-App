@@ -10,7 +10,7 @@ const UserBookDetail = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const token = localStorage.getItem('token'); // Получение токена из localStorage
+        const token = localStorage.getItem('token'); 
         const data = await getBookById(id);
         const authorResponse = await axios.get(`http://localhost:5242/api/authors/${data.authorId}`, {
           headers: {
@@ -18,7 +18,6 @@ const UserBookDetail = () => {
           }
         });
         setBook({ ...data, author: authorResponse.data });
-        console.log('Fetched book:', data); // Вывод результатов в консоль
       } catch (error) {
         console.error('Failed to fetch book', error);
       }

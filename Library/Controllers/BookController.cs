@@ -131,27 +131,5 @@ namespace Library.API.Controllers
             await _bookService.BorrowBookAsync(id, Guid.Parse(userId), request.ReturnBy);
             return Ok();
         }
-
-        private async Task<string> UploadFile(IFormFile file)
-        {
-            if (_env.WebRootPath == null)
-                throw new ArgumentNullException(nameof(_env.WebRootPath), "WebRootPath is null.");
-
-            var filePath = Path.Combine(_env.WebRootPath, "images", file.FileName);
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return $"/images/{file.FileName}";
-        }
-
-        private async Task DeleteFile(string filePath)
-        {
-            var fullPath = Path.Combine(_env.WebRootPath, filePath.TrimStart('/'));
-            if (System.IO.File.Exists(fullPath))
-            {
-                System.IO.File.Delete(fullPath);
-            }
-        }
     }
 }

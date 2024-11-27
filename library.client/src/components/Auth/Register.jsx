@@ -13,7 +13,6 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5242/api/auth/register', { userName, email, password, passwordConfirm });
-      console.log("Response data:", response.data); // Вывод данных ответа в консоль
       navigate('/login');
     } catch (error) {
       console.error('Registration failed', error);

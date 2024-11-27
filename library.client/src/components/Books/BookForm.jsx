@@ -7,7 +7,7 @@ import { uploadFile } from '../../services/fileService';
 const BookForm = () => {
   const { id } = useParams();
   const [book, setBook] = useState({ title: '', description: '', authorId: '', genre: '', isbn: '', borrowedOn: null, returnBy: null, imagePath: '' });
-  const [authors, setAuthors] = useState([]); // Инициализация как пустой массив
+  const [authors, setAuthors] = useState([]); 
   const [newAuthor, setNewAuthor] = useState({ firstName: '', lastName: '', dateOfBirth: '', country: '' });
   const [userRole, setUserRole] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -20,7 +20,7 @@ const BookForm = () => {
         setAuthors(data);
       } catch (error) {
         console.error('Failed to fetch authors', error);
-        setAuthors([]); // Убедитесь, что authors всегда массив
+        setAuthors([]);
       }
     };
 
