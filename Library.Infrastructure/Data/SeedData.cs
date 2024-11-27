@@ -14,7 +14,7 @@ namespace Library.Infrastructure.Data
         {
             if (context.Authors.Any() || context.Books.Any())
             {
-                return; // DB has been seeded
+                return; 
             }
             context.Database.EnsureCreated();
             var users = context.Users.ToList();  
@@ -34,7 +34,7 @@ namespace Library.Infrastructure.Data
                         new Book
                         {
                             Id = Guid.NewGuid(),
-                            ISBN = "9783161484100", // Ensure this value does not exceed 13 characters
+                            ISBN = "9783161484100", 
                             Title = "Sample Book 1",
                             Genre = "Fiction",
                             Description = "A sample book description.",

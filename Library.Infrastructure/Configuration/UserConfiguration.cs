@@ -13,7 +13,7 @@ namespace Library.Infrastructure.Configuration
             builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
             builder.Property(u => u.PasswordHash).IsRequired();
             builder.Property(u => u.Role)
-                   .HasConversion<int>(); // Сохранение роли как int в базе данных
+                   .HasConversion<int>();
         }
     }
 }

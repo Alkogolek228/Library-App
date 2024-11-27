@@ -11,6 +11,6 @@ namespace Library.Core.Interfaces
         void Update(T entity);
         void Delete(T entity);
         Task<PagedResult<T>> GetPagedAsync(int page, int pageSize);
-        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate); // Добавьте этот метод
+        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
     }
 }
