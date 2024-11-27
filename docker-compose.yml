@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - key-network
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=POSTGRES
+      - DB_ADDR=postgres 
+      - DB_DATABASE=keycloak 
+      - DB_URL=jdbc:postgresql://postgres/keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=1234
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    command: ["start-dev"]
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - keycloak_logs:/opt/keycloak/logs
+    networks:
+      - key-network
+
+volumes:
+  postgres_data:
+  keycloak_data:
+  keycloak_logs:
+
+networks:
+  key-network:
